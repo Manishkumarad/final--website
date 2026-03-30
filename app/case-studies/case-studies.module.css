@@ -1,0 +1,8 @@
+/* Per-page module for Case Studies page */
+.page { }
+
+:global(.motion-section) { }
+
+/* ensure the section title on this page is white and bold for legibility */
+:global(.case-studies-page .section-title) { color: #ffffff !important; font-weight: 800 !important; }
+

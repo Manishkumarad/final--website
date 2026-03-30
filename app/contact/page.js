@@ -1,0 +1,175 @@
+"use client"
+
+import React, { useState } from 'react'
+import Link from 'next/link'
+
+export default function ContactPage() {
+  const [form, setForm] = useState({
+    first_name: '',
+    last_name: '',
+    user_email: '',
+    user_phone: '',
+    company_name: '',
+    project_type: '',
+    message: ''
+  })
+  const [budget, setBudget] = useState('')
+  const [submitting, setSubmitting] = useState(false)
+  const [success, setSuccess] = useState(false)
+  const [error, setError] = useState('')
+
+  const selectBudget = (val) => setBudget(val)
+
+  const handleChange = (e) => {
+    const { id, value } = e.target
+    setForm(prev => ({ ...prev, [id]: value }))
+  }
+
+  const submitEnquiry = async (e) => {
+    if (e) e.preventDefault()
+    setError('')
+    // basic validation
+    if (!form.first_name || !form.last_name || !form.user_email || !form.project_type || !form.message) {
+      setError('Please fill required fields.')
+      return
+    }
+    setSubmitting(true)
+    try {
+      // Attempt to POST to existing contact API if present
+      await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...form, budget })
+      })
+      setSuccess(true)
+    } catch (err) {
+      setError('Submission failed. Please try again or email us directly.')
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
+  if (success) return (
+    <section className="enquiry-section container" id="contact">
+      <div style={{padding: '80px 0', textAlign: 'center'}}>
+        <div className="success-icon">✓</div>
+        <h2>Enquiry Sent!</h2>
+        <p>Thanks - we've received your message and will reply within 24 hours.</p>
+        <Link href="/" className="btn">Back to home</Link>
+      </div>
+    </section>
+  )
+
+  return (
+    <>
+      <section className="contact-hero" style={{backgroundImage: "url('/images/careers-hero.jpg')", backgroundSize: 'cover', backgroundPosition: 'center', padding: '310px 0 ', marginBottom: 36, position: 'relative'}}>
+        <div style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0, 0, 0, 0.5)'}}></div>
+        <div className="container" style={{display:'flex', alignItems:'center', gap:24, position: 'relative', zIndex: 1}}>
+          <div style={{flex:1, textAlign: 'center'}}>
+            <div className="section-label" style={{color:'#e6f7f9'}}>Contact</div>
+            <h1 className="section-title" style={{color:'#fff', margin:'8px 0 12px'}}>Send a query or book a demo</h1>
+            <p className="section-sub" style={{color:'rgba(255,255,255,0.9)', maxWidth:560, margin: '0 auto'}}>Use this form to tell us about your project or to schedule a personalised demo. We'll respond within 24 hours.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="enquiry-section" id="contact" style={{padding:'56px 0'}}>
+        <div className="enquiry-inner container" style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40, alignItems: 'start'}}>
+
+          <div className="enquiry-left" style={{paddingTop:8}}>
+            <div className="section-label" style={{color: '#333'}}>Get in touch</div>
+              <h2 className="section-title contact-emphasis-title" style={{fontWeight: 800}}>Let's build something great together.</h2>
+            <p className="section-sub" style={{color: '#666'}}>Tell us about your project and we'll get back to you within 10 Minutes. Or reach us directly right now.</p>
+
+            <div className="contact-methods" style={{marginTop: 24, display: 'grid', gap: 12}}>
+              <a href="tel:+919135112405" className="contact-method" style={{display:'flex', gap:12, alignItems: 'center', textDecoration:'none', color:'inherit'}}>
+              <div className="cm-icon call" style={{color: '#007bff', fontSize: '0.75rem', fontWeight: 700}}>Call</div>
+              <div className="cm-text"><strong style={{color: '#000'}}>Call us directly</strong><div style={{color: '#666'}}>+91 91351 12405 - Mon-Sat, 9am-7pm</div></div>
+              </a>
+              <a href="https://wa.me/919135112405" target="_blank" rel="noreferrer" className="contact-method" style={{display:'flex', gap:12, alignItems: 'center', textDecoration:'none', color:'inherit'}}>
+              <div className="cm-icon whatsapp" style={{color: '#25d366', fontSize: '0.78rem', fontWeight: 700}}>WA</div>
+              <div className="cm-text"><strong style={{color: '#000'}}>WhatsApp us</strong><div style={{color: '#666'}}>+91 91351 12405 - Quick responses</div></div>
+              </a>
+              <a href="mailto:info@deodha.in" className="contact-method" style={{display:'flex', gap:12, alignItems: 'center', textDecoration:'none', color:'inherit'}}>
+                <div className="cm-icon email" style={{color: '#ea4335', fontSize: '0.78rem', fontWeight: 700}}>Email</div>
+                <div className="cm-text"><strong style={{color: '#000'}}>Email us</strong><div style={{color: '#666'}}>info@deodha.in - 24h response</div></div>
+              </a>
+            </div>
+          </div>
+
+          <div className="enquiry-form-box card" style={{padding:24}}>
+            <form id="form-content" onSubmit={submitEnquiry} style={{display:'block'}}>
+              <h3 className="form-title" style={{color: '#000'}}>Send an Enquiry</h3>
+              <p className="form-subtitle" style={{color: '#666'}}>Fill in your details and we'll send you a custom proposal within 24 hours.</p>
+
+              <div className="form-row" style={{display:'flex', gap:12, marginBottom:12}}>
+                <div className="form-group" style={{flex:1}}>
+                  <label style={{color: '#000'}}>First Name *</label>
+                  <input type="text" id="first_name" placeholder="John" required value={form.first_name} onChange={handleChange} />
+                </div>
+                <div className="form-group" style={{flex:1}}>
+                  <label style={{color: '#000'}}>Last Name *</label>
+                  <input type="text" id="last_name" placeholder="Smith" required value={form.last_name} onChange={handleChange} />
+                </div>
+              </div>
+
+              <div className="form-group" style={{marginBottom:12}}>
+                <label style={{color: '#000'}}>Email Address *</label>
+                <input type="email" id="user_email" placeholder="john@company.com" required value={form.user_email} onChange={handleChange} />
+              </div>
+
+              <div className="form-group" style={{marginBottom:12}}>
+                <label style={{color: '#000'}}>Phone / WhatsApp</label>
+                <input type="tel" id="user_phone" placeholder="+91 91351 12405" value={form.user_phone} onChange={handleChange} />
+              </div>
+
+              <div className="form-group" style={{marginBottom:12}}>
+                <label style={{color: '#000'}}>Company / Organisation</label>
+                <input type="text" id="company_name" placeholder="Your company name" value={form.company_name} onChange={handleChange} />
+              </div>
+
+              <div className="form-group">
+                <label style={{color: '#000'}}>What do you need? *</label>
+                <select id="project_type" required value={form.project_type} onChange={(e)=>setForm(f=>({...f, project_type: e.target.value}))}>
+                  <option value="" disabled>Select a service...</option>
+                  <option>AI-Powered Web App</option>
+                  <option>Workflow Automation</option>
+                  <option>Smart Mobile App</option>
+                  <option>AI Chatbot / Agent</option>
+                  <option>Data & Analytics Dashboard</option>
+                  <option>API & Integration</option>
+                  <option>Full Digital Product Build</option>
+                  <option>Other / Not sure yet</option>
+                </select>
+              </div>
+
+              <div className="form-group" style={{marginBottom:12}}>
+                <label style={{color: '#000'}}>Estimated Budget</label>
+                <div className="form-budget" style={{display:'flex', gap:8, flexWrap:'wrap'}}>
+                  {['Under ₹1L','₹1L - ₹5L','₹5L - ₹15L','₹15L+','Not sure'].map(b => (
+                    <button type="button" key={b} className="budget-chip" onClick={() => selectBudget(b)} style={{padding:'8px 12px', borderRadius:12, border: budget===b ? '2px solid var(--brand-500)' : '1px solid #e5e7eb'}}>{b}</button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="form-group" style={{marginBottom:16}}>
+                <label style={{color: '#000'}}>Tell us about your project *</label>
+                <textarea id="message" placeholder="Describe what you want to build, any deadlines, integrations needed, or anything else that helps us understand your vision..." required value={form.message} onChange={handleChange}></textarea>
+              </div>
+
+              {error && <div className="form-error-msg" style={{color:'crimson', marginBottom:12}}>{error}</div>}
+
+              <div style={{display:'flex', gap:12, alignItems:'center'}}>
+              <button className="btn-submit" id="submit-btn" type="submit" disabled={submitting} style={{padding:'12px 18px', color: '#fff', background: 'linear-gradient(90deg, #ff6b35, #f7931e)'}}>
+                <span id="btn-text">{submitting ? 'Sending...' : 'Send Enquiry →'}</span>
+              </button>
+              <Link href="/" className="btn-ghost" style={{color: '#007bff'}}>Back to home</Link>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </section>
+    </>
+  )
+}

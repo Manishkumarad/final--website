@@ -1,0 +1,4 @@
+/* Per-page module for Solutions page */
+.page { }
+
+:global(.solutions-list) { }

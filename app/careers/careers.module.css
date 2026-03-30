@@ -1,0 +1,184 @@
+/* Per-page module for Careers page */
+.page { }
+
+/* Ensure section headings and subtitles are readable on the Careers page (dark on light) */
+.page .section-title { color: var(--grey-900) !important; }
+.page .section-label { color: var(--muted) !important; font-weight:700; }
+.page .section-sub { color: var(--muted) !important; }
+
+:global(.jobs-list) { }
+
+/* Offices showcase */
+.officesSection {
+	width: 100%;
+	margin: 36px 0 18px;
+}
+.offices {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 20px;
+	align-items: stretch;
+}
+.officeCard {
+	overflow: hidden;
+	border-radius: 10px;
+	box-shadow: 0 6px 18px rgba(20,20,30,0.06);
+	background: #fff;
+	display: flex;
+	flex-direction: column;
+}
+.officeImg {
+	width: 100%;
+	height: 320px;
+	object-fit: cover;
+	display: block;
+}
+.officeCaption {
+	padding: 12px 14px;
+	font-size: 14px;
+	color: #333;
+}
+
+@media (max-width: 880px) {
+	.offices { grid-template-columns: 1fr; }
+	.officeImg { height: 220px; }
+	.officesSection { margin: 22px 0; }
+}
+
+@media (min-width: 1600px) {
+	.officeImg { height: 420px; }
+}
+
+/* Careers: growth + hiring columns */
+.careersColumns {
+	display: grid;
+	grid-template-columns: 1fr 360px;
+	gap: 28px;
+	align-items: start;
+	margin-top: 28px;
+}
+.growthCol { }
+.hiringCol { }
+.hiringCard {
+	background: var(--card);
+	border: 1px solid var(--card-border);
+	padding: 16px;
+	border-radius: 12px;
+	box-shadow: var(--elev-1);
+}
+.hiringImg {
+	width: 100%;
+	height: 200px;
+	object-fit: cover;
+	border-radius: 8px;
+	display: block;
+}
+.hiringCard h3 { font-size: 1.1rem; margin-top: 12px; font-weight: 800; }
+.hiringCard p { color: var(--muted); margin-top: 8px; line-height: 1.5; }
+
+@media (max-width: 980px) {
+	.careersColumns { grid-template-columns: 1fr; }
+	.hiringImg { height: 180px; }
+}
+
+/* Meet team full-width section styling */
+.meetTeamSection { margin: 40px 0; display:flex; justify-content:center }
+.meetTeamSection .hiringCard { max-width: 1100px; padding: 28px; border-radius: 14px; display:flex; gap:24px; align-items:center; }
+.meetTeamSection .hiringImg { width: 48%; height: 340px; object-fit: cover; border-radius: 10px; }
+.meetTeamSection h3 { font-size: 1.4rem; margin-top: 0; }
+.meetTeamSection p { font-size: 1.05rem; color: var(--muted); margin-top: 8px; }
+
+@media (max-width: 980px) {
+	.meetTeamSection .hiringCard { flex-direction: column; padding: 18px; }
+	.meetTeamSection .hiringImg { width: 100%; height: 220px; }
+}
+
+/* Careers: "What you'll work on" section */
+.page :global(.work-section) {
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+.page :global(.work-section .section-head) {
+	margin-bottom: 20px;
+}
+
+.page :global(.projects-grid) {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 22px;
+	margin-top: 18px;
+}
+
+.page :global(.project-card) {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	padding: 18px;
+	border-radius: 14px;
+	align-items: stretch;
+}
+
+.page :global(.project-image) {
+	width: 100%;
+	height: 220px;
+	overflow: hidden;
+	border-radius: 10px;
+}
+
+.page :global(.project-image img) {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.page :global(.project-body) {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.page :global(.project-action) {
+	margin-left: 0;
+	margin-top: 8px;
+}
+
+/* Careers: Growth section alignment */
+.page :global(.growth-timeline) {
+	margin-top: 20px;
+	padding: 12px 0 20px;
+}
+
+.page :global(.growth-timeline .section-head.center) {
+	max-width: 900px;
+	margin: 0 auto 18px;
+	text-align: center;
+}
+
+.page :global(.growth-timeline .growth-image) {
+	max-width: 960px;
+	margin: 22px auto 14px;
+	padding: 0 4px;
+}
+
+.page :global(.growth-timeline .growth-image img) {
+	width: 100%;
+	max-width: 960px;
+	border-radius: 14px;
+}
+
+@media (max-width: 980px) {
+	.page :global(.projects-grid) {
+		grid-template-columns: 1fr;
+		gap: 16px;
+	}
+
+	.page :global(.project-image) {
+		height: 200px;
+	}
+
+	.page :global(.growth-timeline .growth-image) {
+		margin: 16px auto 10px;
+	}
+}

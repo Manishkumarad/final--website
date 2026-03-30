@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Deodha AI — Build Smarter. Launch Faster.</title>
+<title>Deodha | Software Engineering & Product Developments</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
 
@@ -19,8 +19,10 @@
     --grey-500: #888888;
     --grey-700: #444444;
     --grey-900: #111111;
-    --accent: #1a1a1a;
-    --highlight: #e0ff4f;
+    --primary: #0B1F3A;
+    --secondary: #2563EB;
+    --accent: #22D3EE;
+    --highlight: #22D3EE;
     --nav-h: 72px;
   }
 
@@ -45,40 +47,120 @@
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     height: var(--nav-h);
-    background: rgba(255,255,255,0.92);
+    background: linear-gradient(135deg, var(--primary), rgba(37, 99, 235, 0.95));
     backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--grey-200);
+    border-bottom: 1px solid rgba(34, 211, 238, 0.2);
     display: flex; align-items: center; justify-content: space-between;
     padding: 0 5%;
   }
   .logo {
     font-family: 'Lato', sans-serif;
     font-weight: 800; font-size: 1.4rem; letter-spacing: -0.5px;
-    color: var(--grey-900); text-decoration: none;
+    color: var(--white); text-decoration: none;
     display: flex; align-items: center; gap: 8px;
   }
-  .logo-dot { width: 10px; height: 10px; background: var(--highlight); border-radius: 50%; display: inline-block; }
+  .logo-dot { width: 10px; height: 10px; background: var(--accent); border-radius: 50%; display: inline-block; }
   .nav-links {
-    display: flex; gap: 36px; list-style: none;
+    display: flex; gap: 40px; list-style: none; align-items: center;
+  }
+  .nav-item-dropdown {
+    position: relative;
+  }
+  .nav-link-btn {
+    text-decoration: none; color: rgba(255,255,255,0.85);
+    font-size: 0.9rem; font-weight: 500; letter-spacing: 0.01em;
+    transition: all 0.2s;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-family: 'Lato', sans-serif;
+  }
+  .nav-link-btn:hover { color: var(--accent); }
+  .nav-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--primary);
+    border: 1px solid rgba(34, 211, 238, 0.2);
+    border-radius: 12px;
+    padding: 20px;
+    min-width: 220px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    box-shadow: 0 20px 40px rgba(11, 31, 58, 0.3);
+    backdrop-filter: blur(10px);
+    margin-top: 12px;
+    z-index: 1000;
+  }
+  .nav-item-dropdown:hover .nav-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .nav-dropdown-col h6 {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(34, 211, 238, 0.8);
+    margin-bottom: 14px;
+  }
+  .nav-dropdown-col a {
+    display: block;
+    padding: 10px 0;
+    text-decoration: none;
+    color: rgba(255,255,255,0.8);
+    font-size: 0.9rem;
+    font-weight: 400;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+    padding-left: 12px;
+  }
+  .nav-dropdown-col a:hover {
+    color: var(--accent);
+    border-left-color: var(--accent);
   }
   .nav-links a {
-    text-decoration: none; color: var(--grey-700);
+    text-decoration: none; color: rgba(255,255,255,0.85);
     font-size: 0.9rem; font-weight: 500; letter-spacing: 0.01em;
     transition: color 0.2s;
   }
-  .nav-links a:hover { color: var(--grey-900); }
+  .nav-links a:hover { color: var(--accent); }
   .nav-cta {
-    background: var(--grey-900); color: var(--white);
+    background: var(--accent); color: var(--primary);
     border: none; padding: 10px 22px; border-radius: 8px;
-    font-family: 'Lato', sans-serif; font-size: 0.9rem; font-weight: 500;
-    cursor: pointer; transition: background 0.2s, transform 0.15s;
+    font-family: 'Lato', sans-serif; font-size: 0.9rem; font-weight: 600;
+    cursor: pointer; transition: all 0.2s, transform 0.15s;
     text-decoration: none;
   }
-  .nav-cta:hover { background: var(--grey-700); transform: translateY(-1px); }
+  .nav-cta:hover { background: var(--white); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(34, 211, 238, 0.3); }
+
+  /* ── POSITIONING BANNER ── */
+  .positioning-banner {
+    background: linear-gradient(90deg, rgba(11, 31, 58, 0.95), rgba(37, 99, 235, 0.9));
+    border-bottom: 1px solid rgba(34, 211, 238, 0.2);
+    padding: 16px 5%;
+    text-align: center;
+    position: relative;
+    z-index: 99;
+  }
+  .positioning-text {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: 0.02em;
+    margin: 0;
+  }
+  .positioning-text strong {
+    color: var(--accent);
+  }
 
   /* ── STATS COUNTER ── */
   .stats-counter {
-    background: linear-gradient(135deg, var(--grey-900), #1a1a1a);
+    background: linear-gradient(135deg, var(--primary), rgba(37, 99, 235, 0.95));
     color: white;
     padding: 80px 5%;
     text-align: center;
@@ -351,29 +433,31 @@
     position: relative;
     width: 30px;
     height: 30px;
+    z-index: 101;
   }
   .mobile-menu-btn span {
     display: block;
     width: 100%;
-    height: 2px;
-    background: var(--grey-900);
+    height: 2.5px;
+    background: white;
     margin: 5px 0;
-    transition: 0.3s;
+    transition: all 0.3s ease;
     position: absolute;
     left: 0;
+    border-radius: 2px;
   }
   .mobile-menu-btn span:nth-child(1) { top: 6px; }
   .mobile-menu-btn span:nth-child(2) { top: 14px; }
   .mobile-menu-btn span:nth-child(3) { top: 22px; }
   .mobile-menu-btn.active span:nth-child(1) {
-    transform: rotate(45deg);
+    transform: rotate(45deg) translateY(10px);
     top: 14px;
   }
   .mobile-menu-btn.active span:nth-child(2) {
     opacity: 0;
   }
   .mobile-menu-btn.active span:nth-child(3) {
-    transform: rotate(-45deg);
+    transform: rotate(-45deg) translateY(-10px);
     top: 14px;
   }
   .mobile-menu {
@@ -382,11 +466,14 @@
     top: var(--nav-h);
     left: 0;
     right: 0;
-    background: rgba(255,255,255,0.98);
+    background: linear-gradient(135deg, var(--primary), rgba(37, 99, 235, 0.95));
     backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--grey-200);
-    padding: 20px 5%;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(34, 211, 238, 0.2);
+    padding: 24px 5%;
+    box-shadow: 0 8px 32px rgba(11, 31, 58, 0.3);
+    max-height: 90vh;
+    overflow-y: auto;
+    z-index: 99;
   }
   .mobile-menu.active {
     display: block;
@@ -395,26 +482,49 @@
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 0;
+  }
+  .mobile-menu-links li {
+    border-bottom: 1px solid rgba(34, 211, 238, 0.2);
+  }
+  .mobile-menu-links li:last-child {
+    border-bottom: none;
   }
   .mobile-menu-links a {
-    text-decoration: none; color: var(--grey-700);
-    font-size: 1rem; font-weight: 500;
-    transition: color 0.2s;
+    text-decoration: none; 
+    color: rgba(255,255,255,0.85);
+    font-size: 1rem; 
+    font-weight: 500;
+    transition: all 0.2s;
     display: block;
-    padding: 10px 0;
+    padding: 16px 0;
   }
-  .mobile-menu-links a:hover { color: var(--grey-900); }
+  .mobile-menu-links a:hover { 
+    color: var(--accent);
+    padding-left: 8px;
+  }
   .mobile-menu-cta {
-    background: var(--grey-900); color: var(--white);
-    border: none; padding: 12px 24px; border-radius: 8px;
-    font-family: 'Lato', sans-serif; font-size: 1rem; font-weight: 500;
-    cursor: pointer; transition: background 0.2s;
+    background: var(--accent); 
+    color: var(--primary);
+    border: none; 
+    padding: 14px 24px; 
+    border-radius: 8px;
+    font-family: 'Lato', sans-serif; 
+    font-size: 1rem; 
+    font-weight: 600;
+    cursor: pointer; 
+    transition: all 0.2s;
     text-decoration: none;
-    display: inline-block;
-    margin-top: 10px;
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
   }
-  .mobile-menu-cta:hover { background: var(--grey-700); }
+  .mobile-menu-cta:hover { 
+    background: var(--white); 
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(34, 211, 238, 0.3);
+  }
 
   /* Chatbot Widget */
   .chat-widget {
@@ -426,13 +536,13 @@
   .chat-bubble {
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, #1a1a1a, #333);
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
     transition: all 0.3s ease;
     position: relative;
   }
@@ -490,7 +600,7 @@
     }
   }
   .chat-popup-header {
-    background: linear-gradient(135deg, #1a1a1a, #333);
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: white;
     padding: 20px;
     display: flex;
@@ -673,12 +783,12 @@
     transition: border-color 0.2s;
   }
   .chat-popup-input input:focus {
-    border-color: #1a1a1a;
+    border-color: var(--secondary);
   }
   .chat-popup-send-btn {
     width: 44px;
     height: 44px;
-    background: #1a1a1a;
+    background: var(--secondary);
     border: none;
     border-radius: 50%;
     color: white;
@@ -689,12 +799,32 @@
     transition: background 0.2s, transform 0.1s;
   }
   .chat-popup-send-btn:hover {
-    background: #333;
+    background: #1d4ed8;
   }
   .chat-popup-send-btn:active {
     transform: scale(0.95);
   }
   @media (max-width: 480px) {
+    nav {
+      padding: 0 3%;
+      height: 64px;
+    }
+    nav .logo {
+      font-size: 1rem;
+    }
+    .positioning-banner {
+      padding: 10px 3%;
+    }
+    .positioning-text {
+      font-size: 0.75rem;
+    }
+    .mobile-menu-btn span {
+      height: 2px;
+      margin: 4px 0;
+    }
+    .mobile-menu-btn span:nth-child(1) { top: 5px; }
+    .mobile-menu-btn span:nth-child(2) { top: 12px; }
+    .mobile-menu-btn span:nth-child(3) { top: 19px; }
     .chat-popup {
       width: calc(100vw - 40px);
       right: 20px;
@@ -762,19 +892,19 @@
     margin-top: 36px; display: flex; gap: 14px; flex-wrap: wrap; align-items: center;
   }
   .btn-primary {
-    background: var(--grey-900); color: var(--white);
+    background: var(--secondary); color: var(--white);
     padding: 14px 28px; border-radius: 10px; border: none;
-    font-family: 'Lato', sans-serif; font-size: 1rem; font-weight: 500;
+    font-family: 'Lato', sans-serif; font-size: 1rem; font-weight: 600;
     cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-block;
   }
-  .btn-primary:hover { background: #333; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+  .btn-primary:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 12px 32px rgba(37, 99, 235, 0.3); }
   .btn-ghost {
-    background: transparent; color: var(--grey-700);
-    padding: 14px 28px; border-radius: 10px; border: 1.5px solid var(--grey-300);
-    font-family: 'Lato', sans-serif; font-size: 1rem; font-weight: 500;
+    background: transparent; color: var(--secondary);
+    padding: 14px 28px; border-radius: 10px; border: 1.5px solid var(--secondary);
+    font-family: 'Lato', sans-serif; font-size: 1rem; font-weight: 600;
     cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-block;
   }
-  .btn-ghost:hover { border-color: var(--grey-900); color: var(--grey-900); transform: translateY(-2px); }
+  .btn-ghost:hover { border-color: #1d4ed8; color: #1d4ed8; background: rgba(37, 99, 235, 0.05); transform: translateY(-2px); }
 
   .hero-stats {
     display: flex; gap: 40px; margin-top: 52px;
@@ -899,10 +1029,10 @@
   }
   .service-card::before {
     content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    background: var(--grey-200); transition: background 0.3s;
+    background: var(--secondary); transition: background 0.3s;
   }
-  .service-card:hover { border-color: var(--grey-300); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.07); }
-  .service-card:hover::before { background: var(--grey-900); }
+  .service-card:hover { border-color: var(--secondary); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(37, 99, 235, 0.15); }
+  .service-card:hover::before { background: var(--secondary); }
   .service-icon {
     width: 48px; height: 48px; background: var(--grey-100);
     border-radius: 12px; margin-bottom: 20px;
@@ -924,7 +1054,7 @@
   .step { display: flex; gap: 20px; align-items: flex-start; }
   .step-num {
     width: 40px; height: 40px; min-width: 40px;
-    background: var(--grey-900); color: white;
+    background: var(--secondary); color: white;
     border-radius: 10px; display: flex; align-items: center; justify-content: center;
     font-family: 'Lato', sans-serif; font-weight: 800; font-size: .9rem;
   }
@@ -932,7 +1062,7 @@
   .step-content p { font-size: .9rem; color: var(--grey-500); line-height: 1.6; }
 
   .how-visual {
-    background: var(--grey-900); border-radius: 24px; padding: 32px;
+    background: linear-gradient(135deg, var(--primary), rgba(37, 99, 235, 0.95)); border-radius: 24px; padding: 32px;
     color: white;
   }
   .pipeline-label { font-size: .75rem; color: #666; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 20px; }
@@ -970,7 +1100,7 @@
 
   /* ── RESULTS / STATS ── */
   .results {
-    background: var(--grey-900); color: white; padding: 80px 5%;
+    background: linear-gradient(135deg, var(--primary), rgba(37, 99, 235, 0.95)); color: white; padding: 80px 5%;
   }
   .results-inner { max-width: 1200px; margin: 0 auto; }
   .results-head { text-align: center; margin-bottom: 60px; }
@@ -1006,11 +1136,10 @@
 
   /* ── FEATURED CLIENT CARD ── */
   .featured-client-card {
-    background: var(--grey-900); border-radius: 24px;
+    background: linear-gradient(135deg, var(--primary), rgba(37, 99, 235, 0.95)); border-radius: 24px;
     padding: 40px 44px; margin-top: 52px; margin-bottom: 28px;
     color: white; position: relative; overflow: hidden;
     max-width: 1200px; margin-left: auto; margin-right: auto;
-    margin-top: 52px; margin-bottom: 28px;
   }
   .featured-client-card::before {
     content: ''; position: absolute; top: -60px; right: -60px;
@@ -1152,18 +1281,18 @@
     cursor: pointer; transition: all 0.2s; font-family: 'Lato', sans-serif;
     line-height: 1.4;
   }
-  .budget-chip:hover { border-color: var(--grey-900); color: var(--grey-900); }
-  .budget-chip.active { background: var(--grey-900); color: var(--white); border-color: var(--grey-900); }
+  .budget-chip:hover { border-color: var(--secondary); color: var(--secondary); }
+  .budget-chip.active { background: var(--secondary); color: var(--white); border-color: var(--secondary); }
 
   .btn-submit {
     width: 100%; padding: 15px; border-radius: 12px;
-    background: var(--grey-900); color: var(--white); border: none;
+    background: var(--secondary); color: var(--white); border: none;
     font-family: 'Lato', sans-serif; font-size: 1rem; font-weight: 700;
     cursor: pointer; transition: all 0.2s; margin-top: 8px;
     display: flex; align-items: center; justify-content: center; gap: 8px;
     line-height: 1.5;
   }
-  .btn-submit:hover { background: #333; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
+  .btn-submit:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 12px 32px rgba(37, 99, 235, 0.3); }
   .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
   .form-success {
@@ -1190,24 +1319,205 @@
 
   /* ── FOOTER ── */
   footer {
-    background: var(--grey-900); color: white; padding: 64px 5% 32px;
+    background: linear-gradient(135deg, var(--primary), rgba(11, 31, 58, 0.95)); 
+    color: white; padding: 80px 5% 0;
+    margin-top: 120px;
+  }
+  .footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
   }
   .footer-top {
-    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
-    max-width: 1200px; margin: 0 auto;
-    padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: grid; 
+    grid-template-columns: 2fr 1.2fr 1.2fr 1.2fr; 
+    gap: 64px;
+    padding-bottom: 60px;
   }
-  .footer-brand .logo { color: white; margin-bottom: 16px; display: flex; }
-  .footer-brand p { font-size: .88rem; color: #666; line-height: 1.7; max-width: 260px; }
-  .footer-col h5 { font-family:'Lato',sans-serif;font-size:.85rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#666;margin-bottom:18px; }
-  .footer-col ul { list-style:none; }
-  .footer-col ul li { margin-bottom: 10px; }
-  .footer-col ul li a { text-decoration:none;color:#888;font-size:.88rem;transition:color .2s; }
-  .footer-col ul li a:hover { color:white; }
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+  }
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.4rem;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    margin-bottom: 16px;
+    color: white;
+  }
+  .logo-dot-footer {
+    width: 10px;
+    height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* Hide decorative logo dots (nav & footer) */
+  .logo-dot, .logo-dot-footer { display: none !important; }
+  .footer-tagline { 
+    font-size: .95rem; 
+    color: rgba(255,255,255,0.85); 
+    line-height: 1.7; 
+    max-width: 280px;
+    margin-bottom: 24px;
+    font-weight: 300;
+  }
+  .footer-socials {
+    display: flex;
+    gap: 16px;
+  }
+  .footer-socials a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(34, 211, 238, 0.1);
+    border-radius: 50%;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 1px solid rgba(34, 211, 238, 0.3);
+  }
+  .footer-socials a:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: translateY(-3px);
+  }
+  .footer-col h5 { 
+    font-family:'Lato',sans-serif;
+    font-size:.8rem;
+    font-weight:700;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:rgba(255,255,255,0.7);
+    margin-bottom:24px; 
+  }
+  .footer-col ul { 
+    list-style:none; 
+  }
+  .footer-col ul li { 
+    margin-bottom: 14px; 
+  }
+  .footer-col ul li a { 
+    text-decoration:none;
+    color:rgba(255,255,255,0.75);
+    font-size:.9rem;
+    font-weight: 400;
+    transition:color .2s, padding-left .2s; 
+    display: inline-block;
+  }
+  .footer-col ul li a:hover { 
+    color: var(--accent);
+    padding-left: 4px;
+  }
+  .footer-divider {
+    height: 1px;
+    background: linear-gradient(90deg, rgba(34,211,238,0.3), rgba(34,211,238,0.1), rgba(34,211,238,0.3));
+    margin: 48px 0;
+  }
   .footer-bottom {
-    max-width:1200px;margin:0 auto;padding-top:28px;
-    display:flex;align-items:center;justify-content:space-between;
-    font-size:.8rem;color:#444;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 0;
+    gap: 40px;
+  }
+  .footer-copyright {
+    font-size: .8rem;
+    color: rgba(255,255,255,0.6);
+  }
+  .footer-copyright a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-copyright a:hover {
+    color: var(--accent);
+  }
+  .separator {
+    margin: 0 8px;
+    opacity: 0.5;
+  }
+  .footer-newsletter {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: .9rem;
+    color: rgba(255,255,255,0.8);
+  }
+  .footer-email-input {
+    padding: 10px 16px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(34,211,238,0.3);
+    border-radius: 8px;
+    color: white;
+    font-family: 'Lato', sans-serif;
+    font-size: .9rem;
+    transition: all 0.2s;
+    min-width: 200px;
+  }
+  .footer-email-input::placeholder {
+    color: rgba(255,255,255,0.5);
+  }
+  .footer-email-input:focus {
+    outline: none;
+    background: rgba(255,255,255,0.08);
+    border-color: var(--accent);
+    box-shadow: 0 0 12px rgba(34,211,238,0.2);
+  }
+  .footer-subscribe-btn {
+    padding: 10px 20px;
+    background: var(--accent);
+    color: var(--primary);
+    border: none;
+    border-radius: 8px;
+    font-family: 'Lato', sans-serif;
+    font-size: .9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .footer-subscribe-btn:hover {
+    background: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(34,211,238,0.3);
+  }
+
+  /* Footer Responsive */
+  @media (max-width: 1024px) {
+    .footer-top {
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+    .footer-bottom {
+      flex-direction: column;
+      text-align: center;
+      gap: 24px;
+    }
+    .footer-newsletter {
+      flex-direction: column;
+      width: 100%;
+    }
+    .footer-email-input {
+      min-width: 100%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    footer {
+      padding: 60px 5% 0;
+    }
+    .footer-top {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .footer-tagline {
+      max-width: 100%;
+    }
   }
 
   /* Responsive */
@@ -1229,8 +1539,20 @@
   }
 
   @media (max-width: 768px) {
-    nav .nav-links, nav .nav-cta { display: none; }
-    .mobile-menu-btn { display: block; }
+    nav {
+      padding: 0 4%;
+    }
+    nav .logo {
+      font-size: 1.1rem;
+    }
+    nav .nav-links, nav .nav-cta { display: none !important; }
+    .mobile-menu-btn { display: block !important; }
+    .positioning-banner {
+      padding: 12px 4%;
+    }
+    .positioning-text {
+      font-size: 0.85rem;
+    }
     .hero { padding-top: calc(var(--nav-h) + 20px); }
     .section-head { padding: 60px 5%; }
     .section-head.center { text-align: left; }
@@ -1355,13 +1677,54 @@
 <!-- NAV -->
 <nav>
   <a href="#" class="logo"><span class="logo-dot"></span>Deodha</a>
+  
   <ul class="nav-links">
-    <li><a href="#services">Services</a></li>
-    <li><a href="#how">Process</a></li>
-    <li><a href="#features">Features</a></li>
-    <li><a href="#results">Results</a></li>
+    <!-- Solutions Dropdown -->
+    <li class="nav-item-dropdown">
+      <button class="nav-link-btn">Solutions</button>
+      <div class="nav-dropdown">
+        <div class="nav-dropdown-col">
+          <h6>Core Services</h6>
+          <a href="#digital-engineering">🛠️ Digital Engineering</a>
+          <a href="#ai-automation">🤖 AI Automation</a>
+          <a href="#crm-solutions">💼 CRM Solutions</a>
+          <a href="#saas-development">☁️ SaaS Development</a>
+        </div>
+      </div>
+    </li>
+
+    <!-- Products Dropdown -->
+    <li class="nav-item-dropdown">
+      <button class="nav-link-btn">Products</button>
+      <div class="nav-dropdown">
+        <div class="nav-dropdown-col">
+          <h6>Our Platform</h6>
+          <a href="#real-estate-crm">🏠 Real Estate CRM</a>
+          <a href="#ai-lead-automation">🚀 AI Lead Automation</a>
+          <a href="#automation-platform">⚙️ Automation Platform</a>
+        </div>
+      </div>
+    </li>
+
+    <!-- Industries Dropdown -->
+    <li class="nav-item-dropdown">
+      <button class="nav-link-btn">Industries</button>
+      <div class="nav-dropdown">
+        <div class="nav-dropdown-col">
+          <h6>Specialization</h6>
+          <a href="#real-estate">🏢 Real Estate</a>
+          <a href="#restaurants">🍽️ Restaurants & Hospitality</a>
+          <a href="#healthcare">🏥 Healthcare</a>
+          <a href="#ecommerce">🛒 E-commerce</a>
+        </div>
+      </div>
+    </li>
+
+    <li><a href="#case-studies" class="nav-link-btn">Case Studies</a></li>
+    <li><a href="#about" class="nav-link-btn">About</a></li>
   </ul>
-  <a href="#contact" class="nav-cta">Get started →</a>
+  
+  <a href="#contact" class="nav-cta">Book a Demo →</a>
   
   <!-- Mobile Menu Button -->
   <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle mobile menu">
@@ -1374,12 +1737,18 @@
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobile-menu">
   <ul class="mobile-menu-links">
-    <li><a href="#services" onclick="closeMobileMenu()">Services</a></li>
-    <li><a href="#how" onclick="closeMobileMenu()">Process</a></li>
-    <li><a href="#features" onclick="closeMobileMenu()">Features</a></li>
-    <li><a href="#results" onclick="closeMobileMenu()">Results</a></li>
-    <li><a href="#contact" class="mobile-menu-cta" onclick="closeMobileMenu()">Get started →</a></li>
+    <li><a href="#solutions" onclick="closeMobileMenu()">Solutions</a></li>
+    <li><a href="#products" onclick="closeMobileMenu()">Products</a></li>
+    <li><a href="#industries" onclick="closeMobileMenu()">Industries</a></li>
+    <li><a href="#case-studies" onclick="closeMobileMenu()">Case Studies</a></li>
+    <li><a href="#about" onclick="closeMobileMenu()">About</a></li>
+    <li><a href="#contact" class="mobile-menu-cta" onclick="closeMobileMenu()">Book a Demo →</a></li>
   </ul>
+</div>
+
+<!-- POSITIONING BANNER -->
+<div class="positioning-banner">
+  <p class="positioning-text">🚀 AI-Powered Digital Engineering & CRM Systems</p>
 </div>
 
 <!-- HERO -->
@@ -1389,7 +1758,7 @@
   <div class="hero-inner">
     <div>
       <div class="hero-badge fade-up"><span class="badge-dot"></span> AI-Powered Development Agency</div>
-      <h1 class="fade-up delay-1">Build <em>smarter</em> apps with AI automation.</h1>
+      <h1 class="fade-up delay-1">We build AI-powered <em>CRM and Digital Engineering systems</em> that increase revenue for businesses.</h1>
       <p class="hero-sub fade-up delay-2">We design, build, and automate web applications and digital products — powered by cutting-edge AI to launch faster and scale further.</p>
       <div class="hero-actions fade-up delay-3">
         <a href="#contact" class="btn-primary">Start your project</a>
@@ -1464,7 +1833,6 @@
       <a href="https://www.wipro.com/" target="_blank" class="logo-item">💻 Wipro</a>
       <a href="https://vercel.com/" target="_blank" class="logo-item">▲ Vercel</a>
       <a href="https://stripe.com/" target="_blank" class="logo-item">💳 Stripe</a>
-      <a href="https://www.notion.so/" target="_blank" class="logo-item">📝 Notion</a>
       <!-- Set 2 — exact duplicate for seamless infinite loop -->
       <a href="https://www.marriott.com/en-us/hotels/bhocy-courtyard-bhopal/overview/" target="_blank" class="logo-item">🏨 Courtyard by Marriott Bhopal</a>
       <a href="https://www.branchesgrillandcafe.com/" target="_blank" class="logo-item">🍽️ Branches Grill & Cafe</a>
@@ -1475,7 +1843,6 @@
       <a href="https://www.wipro.com/" target="_blank" class="logo-item">💻 Wipro</a>
       <a href="https://vercel.com/" target="_blank" class="logo-item">▲ Vercel</a>
       <a href="https://stripe.com/" target="_blank" class="logo-item">💳 Stripe</a>
-      <a href="https://www.notion.so/" target="_blank" class="logo-item">📝 Notion</a>
     </div>
   </div>
 </div>
@@ -2194,6 +2561,76 @@
     </div>
   </div>
 </section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-container">
+    <!-- Footer Top Section -->
+    <div class="footer-top">
+      <!-- Brand & Description -->
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span class="logo-dot-footer"></span>
+          <span>deodha</span>
+        </div>
+        <p class="footer-tagline">Building the next generation of intelligent products — faster, smarter, and built to last.</p>
+        <div class="footer-socials">
+          <a href="https://linkedin.com" target="_blank" title="LinkedIn">🔗</a>
+          <a href="https://twitter.com" target="_blank" title="Twitter">𝕏</a>
+          <a href="https://github.com" target="_blank" title="GitHub">⚙️</a>
+        </div>
+      </div>
+
+      <!-- Product Column -->
+      <div class="footer-col">
+        <h5>Product</h5>
+        <ul>
+          <li><a href="#ai-web-apps">AI Web Apps</a></li>
+          <li><a href="#automation">Automation</a></li>
+          <li><a href="#mobile">Mobile</a></li>
+          <li><a href="#chatbots">Chatbots</a></li>
+          <li><a href="#analytics">Analytics</a></li>
+        </ul>
+      </div>
+
+      <!-- Company Column -->
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#careers">Careers</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#press">Press</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Resources Column -->
+      <div class="footer-col">
+        <h5>Resources</h5>
+        <ul>
+          <li><a href="#case-studies">Case Studies</a></li>
+          <li><a href="#documentation">Documentation</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#help-center">Help Center</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Footer Bottom Section -->
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <div class="footer-copyright">
+        <p>&copy; 2026 NexusAI. All rights reserved.<span class="separator">•</span><a href="#privacy">Privacy</a><span class="separator">•</span><a href="#terms">Terms</a></p>
+      </div>
+      <div class="footer-newsletter">
+        <span>Stay updated:</span>
+        <input type="email" placeholder="your@email.com" class="footer-email-input">
+        <button class="footer-subscribe-btn">Subscribe</button>
+      </div>
+    </div>
+  </div>
+</footer>
 
 <script>
   let selectedBudget = '';

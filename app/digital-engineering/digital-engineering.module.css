@@ -1,0 +1,88 @@
+/* Page-scoped CSS module for Digital Engineering
+   This file demonstrates per-page CSS (MVC-style). It scopes page-specific
+   overrides and keeps global CSS minimal. Use :global(...) to target existing
+   class names used by components on this page. */
+
+.page {
+  /* ensure any page-level layout adjustments are isolated here */
+  padding-top: 0; /* hero handles its own spacing */
+}
+
+/* Page-level dark background and text color - scoped to this page */
+:global(.digital-engineering-page) {
+  background: #07111f;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* Hero tweaks scoped to the page */
+:global(.digital-engineering-page .hero) {
+  position: relative;
+}
+
+/* position the hero background so the AI head appears on the right */
+:global(.de-hero .motion-hero-bg) {
+  background-position: right center;
+  background-size: cover;
+  opacity: 1; /* ensure image is fully visible under the overlay */
+}
+
+/* reduce default overlay darkness for this hero so image details remain visible */
+:global(.de-hero::after) {
+  background: linear-gradient(180deg, rgba(2,6,23,0.18), rgba(2,6,23,0.22));
+}
+
+/* ensure hero headings are white on this page */
+:global(.de-hero h1), :global(.de-hero .hero-sub) {
+  color: #ffffff !important;
+}
+
+/* Products grid and cards (page-scoped overrides) */
+:global(.de-products-grid) {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+/* Ensure section titles are readable on the dark page background (scoped) */
+:global(.digital-engineering-page .section-title) {
+  color: #ffffff !important;
+  font-weight: 800 !important;
+}
+
+:global(.de-product-card) {
+  background: #ffffff;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.18);
+  transition: all 0.35s ease;
+}
+
+:global(.de-product-card:hover) { transform: translateY(-10px); }
+
+:global(.de-product-image-wrap) { height: 260px; background: #f8fafc; overflow: hidden; }
+:global(.de-product-image) { width:100%; height:100%; object-fit:contain; display:block; }
+:global(.de-product-content) { padding:26px; background:#0f172a; }
+
+/* Case studies and motion sections */
+:global(.motion-section), :global(.sticky-story) {
+  background: linear-gradient(180deg, #0f172a, #111827);
+  border-radius: 24px;
+  padding: 40px;
+  margin-bottom: 40px;
+}
+
+/* KPI / dashboard */
+:global(#dashboard) { background: linear-gradient(180deg, #0b1120, #111827); border-radius:28px; padding:60px; }
+:global(.kpi-grid) { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+:global(.kpi-card) { background: rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.06); border-radius:20px; padding:24px; backdrop-filter: blur(10px); }
+
+/* Responsive adjustments scoped to this page */
+@media (max-width: 1024px) {
+  :global(.de-products-grid), :global(.stats-grid), :global(.kpi-grid) {
+    grid-template-columns: 1fr;
+  }
+
+  :global(.section-title) { font-size: 34px; }
+  :global(#dashboard) { padding: 30px; }
+}

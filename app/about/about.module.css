@@ -1,0 +1,5 @@
+/* Per-page module for About page */
+.page { }
+
+/* Use :global to adjust shared classes if needed */
+:global(.section-head) { }

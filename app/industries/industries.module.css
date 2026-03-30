@@ -1,0 +1,4 @@
+/* Per-page module for Industries page */
+.page { }
+
+:global(.industry-grid) { }
