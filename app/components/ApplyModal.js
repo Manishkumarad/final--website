@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 export default function ApplyModal({ job, open, onClose, onSuccess }){
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
   const [resumeName, setResumeName] = useState('')
   const [resumeBase64, setResumeBase64] = useState(null)
   const [message, setMessage] = useState('')
@@ -40,6 +41,7 @@ export default function ApplyModal({ job, open, onClose, onSuccess }){
           const json = await res.json()
           if (json?.name) setName(json.name)
           if (json?.email) setEmail(json.email)
+          if (json?.phone) setPhone(json.phone)
         }
       } catch (err) {
         console.error('Resume parse failed', err)
@@ -73,7 +75,7 @@ export default function ApplyModal({ job, open, onClose, onSuccess }){
       const resp = await fetch('/api/jobs/apply', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, message, jobId: job?.id || job?.title, resumeBase64: payloadResume })
+        body: JSON.stringify({ name, email, phone, message, jobId: job?.id || job?.title, resumeBase64: payloadResume })
       })
       const json = await resp.json()
       if (resp.ok) {
@@ -100,6 +102,15 @@ export default function ApplyModal({ job, open, onClose, onSuccess }){
 
           <label>Email</label>
           <input type="email" value={email} onChange={e=>setEmail(e.target.value)} required />
+
+          <label>Phone</label>
+          <input
+            type="tel"
+            value={phone}
+            onChange={e=>setPhone(e.target.value)}
+            placeholder="e.g. +91 98765 43210"
+            required
+          />
 
           <label>Resume (txt or PDF)</label>
           <input type="file" accept=".txt,application/pdf" onChange={handleFile} />
