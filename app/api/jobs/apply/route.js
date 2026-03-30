@@ -1,8 +1,7 @@
-import fs from 'fs'
-import path from 'path'
 import { Resend } from 'resend'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
+export const runtime = 'nodejs'
 
 export async function POST(req) {
   try {
@@ -14,27 +13,21 @@ export async function POST(req) {
       return new Response(JSON.stringify({ error: 'Missing required fields' }), { status: 400 })
     }
 
-    // Persist application locally (simple JSON append)
-    const dataDir = path.resolve('./data')
-    if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir)
-    const file = path.join(dataDir, 'applications.json')
-    let apps = []
-    if (fs.existsSync(file)) {
-      try { apps = JSON.parse(fs.readFileSync(file)) } catch(e) { apps = [] }
-    }
+    // Generate an application id for logs and email traceability.
     const record = { id: `${Date.now()}`, name, email, jobId, phone, message, receivedAt: new Date().toISOString() }
-    apps.push(record)
-    fs.writeFileSync(file, JSON.stringify(apps, null, 2))
+    let resumeAttachment = null
 
-    // Save resume if present (base64)
     if (resumeBase64) {
       const matches = resumeBase64.match(/^data:(.+);base64,(.+)$/)
-      let ext = 'bin'
-      let b64 = resumeBase64
-      if (matches) { ext = matches[1].split('/').pop(); b64 = matches[2] }
-      const buf = Buffer.from(b64, 'base64')
-      const resumePath = path.join(dataDir, `resume-${record.id}.${ext}`)
-      fs.writeFileSync(resumePath, buf)
+      if (matches) {
+        const mime = matches[1]
+        const content = matches[2]
+        const ext = mime.split('/').pop() || 'bin'
+        resumeAttachment = {
+          filename: `resume-${record.id}.${ext}`,
+          content
+        }
+      }
     }
 
     // Send email notification to admin using Resend
@@ -43,7 +36,9 @@ export async function POST(req) {
         await resend.emails.send({
           from: process.env.RESEND_FROM_EMAIL || 'noreply@resend.dev',
           to: process.env.ADMIN_EMAIL,
+          reply_to: email,
           subject: `New Job Application: ${name} - ${jobId}`,
+          attachments: resumeAttachment ? [resumeAttachment] : undefined,
           html: `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
               <h2 style="color: #333;">New Job Application</h2>
