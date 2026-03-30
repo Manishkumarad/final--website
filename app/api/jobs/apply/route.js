@@ -1,10 +1,10 @@
-import { Resend } from 'resend'
-
 export const runtime = 'nodejs'
 
 export async function POST(req) {
   try {
-    const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
+    const resend = process.env.RESEND_API_KEY
+      ? new (await import('resend')).Resend(process.env.RESEND_API_KEY)
+      : null
 
     const body = await req.json()
     const { name, email, jobId, message, resumeBase64, phone } = body
