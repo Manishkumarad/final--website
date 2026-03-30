@@ -1,20 +1,28 @@
 import './globals.css'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
+import { Lato } from 'next/font/google'
+
+const lato = Lato({
+  subsets: ['latin'],
+  weight: ['300', '400', '700', '900'],
+  display: 'swap',
+})
 
 export const metadata = {
-   title: 'Deodha | Software Engineering & Product Developments',
+  title: 'Deodha | Software Engineering & Product Developments',
   description: 'Software Engineering & Product Developments',
+  icons: {
+    icon: '/image.png',
+    shortcut: '/image.png',
+    apple: '/image.png',
+  },
 }
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head>
-        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet" />
-        <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-      </head>
-      <body>
+      <body className={lato.className}>
         <Nav />
         {children}
         <Footer />
